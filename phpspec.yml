@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: tj_core
+        psr4_prefix: tj_core
+        src_path: app

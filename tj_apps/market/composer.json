@@ -1,0 +1,12 @@
+{
+    "name": "tj_apps/market",
+    "description": "Market place app for trojan joy",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nishant Jani",
+            "email": "nishantjani10@gmail.com"
+        }
+    ],
+    "require": {}
+}
