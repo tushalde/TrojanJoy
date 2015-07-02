@@ -17,11 +17,13 @@ elixir(function(mix) {
             'assets/js/libs/*.js',
             'tj_apps/**/**/*.js'
         ],'' ,'resources/');
-    mix.less([
-            'app.less'
-        ]);
+    mix.styles([
+        'bootstrap.min.css',
+        'trojan_joy_core.css'
+    ]);
     mix.version([
             'css/all.css',
             'js/all.js'
         ]);
+    mix.copy('fonts','public/fonts')
 });
