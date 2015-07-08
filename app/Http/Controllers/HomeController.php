@@ -19,16 +19,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        Auth::loginUsingId(2);
-        if (Auth::check())
-        {
-             return redirect()->action('HomeController@home');
-        }
-        else
-        {
-            //Show the landing page
-            echo 'not logged in';
-        }
+        return View('core.home');
+//        Auth::loginUsingId(2);
+//        if (Auth::check())
+//        {
+//             return redirect()->action('HomeController@home');
+//        }
+//        else
+//        {
+//            //Show the landing page
+//            echo 'not logged in';
+//        }
     }
 
     public function action_home()
