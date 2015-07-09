@@ -13,9 +13,6 @@
 
 <div class="">
     @yield('content')
-    //TODO: Remove below html and move it to a view
-
-
 </div>
 
 </body>

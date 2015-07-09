@@ -2,9 +2,9 @@
 
 Route::get('/', 'HomeController@index');
 
-Route::group(array('prefix' => 'api', 'middleware' => 'auth'), function()
+Route::group(array('prefix' => 'api'), function()
 {
-    Route::resource('home', 'HomController');
+    Route::resource('user', 'UserController');
 
 });
 

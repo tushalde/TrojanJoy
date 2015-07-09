@@ -4,10 +4,12 @@ namespace tj_core\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Response;
 use tj_core\Http\Requests;
 use tj_core\Http\Controllers\Controller;
+use tj_core\Models\User;
 
-class UserController extends Controller
+class UserController extends APIBaseController
 {
     /**
      * Display a listing of the resource.
@@ -17,6 +19,8 @@ class UserController extends Controller
     public function index()
     {
         //
+
+        return (Response::json(array(), 550));
     }
 
     /**
@@ -47,7 +51,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        return (Response::json(User::find($id)));
     }
 
     /**
