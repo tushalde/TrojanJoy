@@ -19,7 +19,9 @@ elixir(function(mix) {
         ],'' ,'resources/');
     mix.styles([
         'bootstrap.min.css',
-        'trojan_joy_core.css'
+        'trojan_joy_core.css',
+        'login_page.css'
+
     ]);
     mix.version([
             'css/all.css',
