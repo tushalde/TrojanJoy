@@ -1,7 +1,11 @@
 <?php
 
-Route::get('/', function () {
-    return view('layout');
+Route::get('/', 'HomeController@index');
+
+Route::group(array('prefix' => 'api', 'middleware' => 'auth'), function()
+{
+    Route::resource('home', 'HomController');
+
 });
 
 // Using different syntax for Blade to avoid conflicts with Jade.

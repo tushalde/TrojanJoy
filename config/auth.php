@@ -28,7 +28,7 @@ return [
     |
     */
 
-    'model' => tj_core\User::class,
+    'model' => tj_core\Models\User::class,
 
     /*
     |--------------------------------------------------------------------------

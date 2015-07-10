@@ -9,23 +9,11 @@
     <link rel="stylesheet" href="/css/app.css"/>
     <link rel="stylesheet" href="<% elixir('css/all.css') %>"/>
     <script>
-
     </script>
 </head>
 <body ng-app="myMarket">
-
-
-<div class="container">
-    <div class="jumbotron">
-        <h1>Trojan Joy</h1>
-        <p>Joy for Joy</p>
-        <div ng-controller="LoginController">
-            <a ng-click="login()" id="loginText"> <img src="images/usc_login.png"> </a>
-        </div>
-
-    </div>
+<div class="content">
+    @yield('content')
 </div>
-
-
 </body>
 </html>
