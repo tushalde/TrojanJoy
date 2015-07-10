@@ -21,16 +21,6 @@ class HomeController extends Controller
     {
         //TODO: Conditioanlly take user to home or landing page
         return View('core.landing-page');
-//        Auth::loginUsingId(2);
-//        if (Auth::check())
-//        {
-//             return redirect()->action('HomeController@home');
-//        }
-//        else
-//        {
-//            //Show the landing page
-//            echo 'not logged in';
-//        }
     }
 
     public function action_home()
