@@ -2,7 +2,7 @@
 
 Route::get('/', 'HomeController@index');
 
-Route::group(array('prefix' => 'api'), function()
+Route::group(array('prefix' => 'api', 'middleware' => 'auth'), function()
 {
     Route::resource('user', 'UserController');
 
