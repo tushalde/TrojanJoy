@@ -2,15 +2,25 @@
 
 namespace tj_core\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Response;
 use tj_core\Http\Requests;
-use tj_core\Http\Controllers\Controller;
 use tj_core\Models\User;
 
 class UserController extends APIBaseController
 {
+    /**
+     * Instantiate a new UserController instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+//        $this->middleware('auth');
+//        $this->middleware('isMindingOwnBusiness:id', ['only' => ['create','update','destroy']]);
+
+//        $this->middleware('subscribed', ['except' => ['fooAction', 'barAction']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,9 +28,7 @@ class UserController extends APIBaseController
      */
     public function index()
     {
-        //
-
-        return (Response::json(array(), 550));
+        return ($this->getStructuredResponse(User::all()));
     }
 
     /**
@@ -48,10 +56,11 @@ class UserController extends APIBaseController
      *
      * @param  int  $id
      * @return Response
+     * @Middleware("userAuth")
      */
     public function show($id)
     {
-        return (Response::json(User::find($id)));
+        return ($this->getStructuredResponse(User::find($id)));
     }
 
     /**

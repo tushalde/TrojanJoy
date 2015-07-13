@@ -27,6 +27,7 @@ class Kernel extends HttpKernel
      */
     protected $routeMiddleware = [
         'auth' => \tj_core\Http\Middleware\Authenticate::class,
+        'isMindingOwnBusiness' => \tj_core\Http\Middleware\IsMindingOwnBusiness::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \tj_core\Http\Middleware\RedirectIfAuthenticated::class,
     ];
