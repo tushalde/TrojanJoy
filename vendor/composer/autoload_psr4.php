@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'tj_core\\' => array($baseDir . '/app'),
     'market\\' => array($baseDir . '/tj_apps/market'),
+    'kartik\\plugins\\fileinput\\' => array($vendorDir . '/kartik-v/bootstrap-fileinput'),
     'XdgBaseDir\\' => array($vendorDir . '/dnoegel/php-xdg-base-dir/src'),
     'Symfony\\Component\\Yaml\\' => array($vendorDir . '/symfony/yaml'),
     'Symfony\\Component\\VarDumper\\' => array($vendorDir . '/symfony/var-dumper'),

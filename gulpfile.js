@@ -13,16 +13,18 @@ var elixir = require('laravel-elixir');
 
 elixir(function(mix) {
     mix.scripts([
-            'assets/js/libs/**/*.js',
-            'assets/js/libs/*.js',
-            'tj_apps/**/**/*.js'
-        ],'' ,'resources/');
+            'resources/assets/js/libs/**/*.js',
+            'resources/assets/js/libs/*.js',
+            'resources/tj_apps/**/**/*.js',
+            'vendor/kartik-v/bootstrap-fileinput/js/fileinput.js'
+        ],'' ,'./');
     mix.styles([
-        'bootstrap.min.css',
-        'trojan_joy_core.css',
-        'login_page.css'
-
-    ]);
+        'resources/assets/css/bootstrap.min.css',
+        'resources/assets/css/trojan_joy_core.css',
+        'resources/assets/css/login_page.css',
+        'resources/assets/css/sell_home.css',
+        'vendor/kartik-v/bootstrap-fileinput/css/fileinput.css'
+        ],'','./');
     mix.version([
             'css/all.css',
             'js/all.js'
