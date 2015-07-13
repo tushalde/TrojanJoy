@@ -2841,6 +2841,7 @@ return array(
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
     'XdgBaseDir\\Xdg' => $vendorDir . '/dnoegel/php-xdg-base-dir/src/Xdg.php',
     'market\\Controllers\\BaseController' => $baseDir . '/tj_apps/market/Controllers/BaseController.php',
+    'market\\Controllers\\SellController' => $baseDir . '/tj_apps/market/Controllers/SellController.php',
     'market\\MarketServiceProvider' => $baseDir . '/tj_apps/market/MarketServiceProvider.php',
     'phpDocumentor\\Reflection\\DocBlock' => $vendorDir . '/phpdocumentor/reflection-docblock/src/phpDocumentor/Reflection/DocBlock.php',
     'phpDocumentor\\Reflection\\DocBlock\\Context' => $vendorDir . '/phpdocumentor/reflection-docblock/src/phpDocumentor/Reflection/DocBlock/Context.php',
