@@ -2,10 +2,9 @@
 
 Route::get('/', 'HomeController@index');
 
-Route::group(array('prefix' => 'api', 'middleware' => 'auth'), function()
+Route::group(array('prefix' => 'api'), function()
 {
     Route::resource('user', 'UserController');
-
 });
 
 // Using different syntax for Blade to avoid conflicts with Jade.

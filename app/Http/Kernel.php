@@ -17,7 +17,7 @@ class Kernel extends HttpKernel
         \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
         \Illuminate\Session\Middleware\StartSession::class,
         \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-        \tj_core\Http\Middleware\VerifyCsrfToken::class,
+//        \tj_core\Http\Middleware\VerifyCsrfToken::class,
     ];
 
     /**
@@ -27,6 +27,7 @@ class Kernel extends HttpKernel
      */
     protected $routeMiddleware = [
         'auth' => \tj_core\Http\Middleware\Authenticate::class,
+        'isMindingOwnBusiness' => \tj_core\Http\Middleware\IsMindingOwnBusiness::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \tj_core\Http\Middleware\RedirectIfAuthenticated::class,
     ];

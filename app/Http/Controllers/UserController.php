@@ -2,15 +2,27 @@
 
 namespace tj_core\Http\Controllers;
 
+use Validator;
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Response;
 use tj_core\Http\Requests;
-use tj_core\Http\Controllers\Controller;
 use tj_core\Models\User;
 
 class UserController extends APIBaseController
 {
+    /**
+     * Instantiate a new UserController instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+//        $this->middleware('auth');
+//        $this->middleware('isMindingOwnBusiness:id', ['only' => ['create','update','destroy']]);
+
+//        $this->middleware('subscribed', ['except' => ['fooAction', 'barAction']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,9 +30,7 @@ class UserController extends APIBaseController
      */
     public function index()
     {
-        //
-
-        return (Response::json(array(), 550));
+        return ($this->getStructuredResponse(User::all()));
     }
 
     /**
@@ -34,13 +44,25 @@ class UserController extends APIBaseController
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
+     * @param Request $request
      * @return Response
      */
-    public function store()
+    public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required|alpha',
+            'last_name' => 'required|alpha',
+            'email' => 'required|email|unique:users,email',
+            'phone_number' => 'sometimes|numeric',
+        ]);
+
+        if ($validator->fails()) {
+            return Response($this->getStructuredResponse(array(), $validator->errors()->all()));
+        }
+
+        $user = new User($request->all());
+        $saved_user = $user->save();
+        return Response($this->getStructuredResponse($saved_user, 'success', array()));
     }
 
     /**
@@ -48,10 +70,11 @@ class UserController extends APIBaseController
      *
      * @param  int  $id
      * @return Response
+     * @Middleware("userAuth")
      */
     public function show($id)
     {
-        return (Response::json(User::find($id)));
+        return ($this->getStructuredResponse(User::find($id)));
     }
 
     /**
