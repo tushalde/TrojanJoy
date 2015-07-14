@@ -1,3 +1,4 @@
+/* CSS for adding sell item modal window */
 .input-block-level {
     display: block;
     width: 100%;
@@ -15,21 +16,12 @@
     color: white;
     font-size: 28px;
 }
-.align_vertical_center {
-    vertical-align: middle;
-    text-align: center;
-    position: relative;
-    top: 50%;
-    -ms-transform: translateY(50%);
-    -webkit-transform: translateY(50%);
-    transform: translateY(50%);
-}
 
 .modal-backdrop {
     z-index: -1;
 }
 
-
+/* CSS for individual item displayed on sell homepage */
 .main {
     background-color: #f2f2f2 ;
     padding: 40px 0;
