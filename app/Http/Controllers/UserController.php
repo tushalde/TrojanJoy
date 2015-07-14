@@ -2,6 +2,8 @@
 
 namespace tj_core\Http\Controllers;
 
+use Validator;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use tj_core\Http\Requests;
 use tj_core\Models\User;
@@ -42,13 +44,25 @@ class UserController extends APIBaseController
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
+     * @param Request $request
      * @return Response
      */
-    public function store()
+    public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required|alpha',
+            'last_name' => 'required|alpha',
+            'email' => 'required|email|unique:users,email',
+            'phone_number' => 'sometimes|numeric',
+        ]);
+
+        if ($validator->fails()) {
+            return Response($this->getStructuredResponse(array(), $validator->errors()->all()));
+        }
+
+        $user = new User($request->all());
+        $saved_user = $user->save();
+        return Response($this->getStructuredResponse($saved_user, 'success', array()));
     }
 
     /**
