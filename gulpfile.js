@@ -23,7 +23,9 @@ elixir(function(mix) {
         'resources/assets/css/trojan_joy_core.css',
         'resources/assets/css/login_page.css',
         'resources/assets/css/sell_home.css',
-        'vendor/kartik-v/bootstrap-fileinput/css/fileinput.css'
+        'vendor/kartik-v/bootstrap-fileinput/css/fileinput.css',
+        'resources/assets/css/signup.css',
+        'resources/assets/css/profile_view.css'
         ],'','./');
     mix.version([
             'css/all.css',

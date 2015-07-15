@@ -16,7 +16,7 @@ $(document).ready(function() {
         //$('#myModal').modal('hide');
     });
     $('#clear_sell_item').click(function() {
-        $('#input-705').fileinput('reset');
+        $('#input-705').fileinput('refresh');
         $('#item_title').val("");
         $('#description').val("");
         $("select#sell_dept").find("option#default").attr("selected", "selected");
