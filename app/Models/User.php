@@ -32,4 +32,19 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var array
      */
     protected $hidden = ['id', 'updated_at', 'phone_number', 'email'];
+
+    /**
+     * Get a user by email, throws exception if email not found
+     * @param string $email email of user
+     * @return bool Need to throw an exception here.
+     */
+    public static function getUserByEmail($email)
+    {
+        if (empty($email)) {
+            return false;
+        }
+
+        $user = User::where("email", "=", $email)->firstorFail();
+        return $user;
+    }
 }

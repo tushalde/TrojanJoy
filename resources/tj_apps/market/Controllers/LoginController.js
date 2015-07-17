@@ -3,11 +3,10 @@ myMarket.service('myService', function () { /* ... */ });
 myMarket.controller('LoginController',['$scope',function ($scope){
     $scope.login = function(){
         var OAUTHURL    =   'https://accounts.google.com/o/oauth2/auth?';
-        var VALIDURL    =   'https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=';
+
         var SCOPE1       =   'https://www.googleapis.com/auth/userinfo.email';
         var CLIENTID    =   '886572792671-rp0rm9ehgs5rg2b32mcfp18f4ccrdctm.apps.googleusercontent.com';
-        var REDIRECT    =   'http://localhost:8080';
-        var LOGOUT      =   'http://accounts.google.com/Logout';
+        var REDIRECT    =   'http://localhost:8080/login';
         var TYPE        =   'token';
         var HD          =   'usc.edu';
         var _url        =   OAUTHURL + 'scope=' + SCOPE1 + '&client_id=' + CLIENTID + '&redirect_uri=' + REDIRECT + '&response_type=' + TYPE+'&hd='+HD;
@@ -30,7 +29,8 @@ myMarket.controller('LoginController',['$scope',function ($scope){
                     expiresIn = gup(url, 'expires_in');
                     win.close();
 
-                    validateToken(acToken);
+                    url = url.replace("login#","login?");
+                    window.location.href = url;
                 }
             } catch(e) {
             }
@@ -66,6 +66,7 @@ myMarket.controller('LoginController',['$scope',function ($scope){
 
         //credits: http://www.netlobo.com/url_query_string_javascript.html
         function gup(url, name) {
+            debugger;url
             name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
             var regexS = "[\\#&]"+name+"=([^&#]*)";
             var regex = new RegExp( regexS );

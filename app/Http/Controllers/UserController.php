@@ -49,12 +49,7 @@ class UserController extends APIBaseController
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'first_name' => 'required|alpha',
-            'last_name' => 'required|alpha',
-            'email' => 'required|email|unique:users,email',
-            'phone_number' => 'sometimes|numeric',
-        ]);
+        $validator = Validator::make($request->all(), static::getUserValidationRules());
 
         if ($validator->fails()) {
             return Response($this->getStructuredResponse(array(), $validator->errors()->all()));
@@ -108,5 +103,15 @@ class UserController extends APIBaseController
     public function destroy($id)
     {
         //
+    }
+
+    private static function getUserValidationRules()
+    {
+        return [
+            'first_name' => 'required|alpha',
+            'last_name' => 'required|alpha',
+            'email' => 'required|email|unique:users,email',
+            'phone_number' => 'sometimes|numeric',
+        ];
     }
 }
