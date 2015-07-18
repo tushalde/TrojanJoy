@@ -1,7 +1,7 @@
 <?php
 
 Route::get('/', 'HomeController@index');
-Route::get('/login/{access_token?}/{token_type?}/{expires_in?}', 'HomeController@action_login');
+Route::get('/login', 'HomeController@action_login');
 
 Route::group(array('prefix' => 'api'), function()
 {

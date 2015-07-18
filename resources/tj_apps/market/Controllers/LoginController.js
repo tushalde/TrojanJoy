@@ -76,15 +76,6 @@ myMarket.controller('LoginController',['$scope',function ($scope){
             else
                 return results[1];
         }
-
-        function startLogoutPolling() {
-            $('#loginText').show();
-            $('#logoutText').hide();
-            loggedIn = false;
-            $('#uName').text('Welcome ');
-            $('#imgHolder').attr('src', 'none.jpg');
-        }
-
     };
 
 }]);

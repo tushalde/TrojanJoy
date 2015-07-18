@@ -25,7 +25,7 @@ class HomeController extends Controller
     {
         //if logged in goto market home
         if (Auth::check()) {
-            return Redirect::route('market-home');
+            return View('market.base.home');
         }
         //else goto landing page!
         return View('core.landing-page');
@@ -48,6 +48,7 @@ class HomeController extends Controller
             return false;
         }
 
+        //guzzle to query google api with access token
         $this->_guzzle_client = new Client();
 
         //if valid token
@@ -57,9 +58,12 @@ class HomeController extends Controller
             //find the user with the email id
             $user = User::getUserByEmail($user_data['email']);
             Auth::login($user);
-            Redirect::route('home');
+            return Redirect::route('market-home');
         }
-
+        //Something went wrong, logout if at all we logged user in
+        Auth::logout();
+        //Go to landing page
+        return Redirect::route('/');
     }
 
     /**
