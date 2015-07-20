@@ -3,13 +3,9 @@
 namespace tj_core\Http\Controllers;
 
 use GuzzleHttp\Client;
-use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\View;
 use tj_core\Http\Requests;
-use tj_core\Http\Controllers\Controller;
 use tj_core\Models\User;
 
 class HomeController extends Controller

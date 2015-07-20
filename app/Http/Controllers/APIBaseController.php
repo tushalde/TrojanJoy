@@ -11,6 +11,17 @@ use Illuminate\Support\Facades\Response;
 
 class APIBaseController extends Controller
 {
+    protected $request;
+    /**
+     * Instantiate a new UserController instance.
+     *
+     * @return void
+     */
+    public function __construct(\Illuminate\Http\Request $request)
+    {
+        $this->request = $request;
+    }
+
     protected function getStructuredResponse($payload, $status = 'success', $meta = array())
     {
         $response = array();
