@@ -1,7 +1,8 @@
 <?php
 
-Route::get('/', 'HomeController@index');
+Route::get('/', ['as' => 'root', 'uses' => 'HomeController@index']);
 Route::get('/login', 'HomeController@action_login');
+Route::get('/logout', 'HomeController@action_logout');
 
 Route::group(array('prefix' => 'api'), function()
 {

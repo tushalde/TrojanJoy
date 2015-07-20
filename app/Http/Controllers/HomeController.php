@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use tj_core\Http\Requests;
 use tj_core\Models\User;
+use Session;
 
 class HomeController extends Controller
 {
@@ -59,7 +60,23 @@ class HomeController extends Controller
         //Something went wrong, logout if at all we logged user in
         Auth::logout();
         //Go to landing page
-        return Redirect::route('/');
+        return Redirect::route('root');
+    }
+
+    /**
+     * Handle user logout and redirect to landing page
+     *
+     * Flush all user session data. Logout. Redirect.
+     * @return mixed
+     */
+    public function action_logout()
+    {
+        //remove all session data, ironically not saving any session as of now! what a futuristic code, Ratta boy
+        Session::flush();
+        //logout the user
+        Auth::logout();
+        //Ghar pe ja
+        return Redirect::route('root');
     }
 
     /**

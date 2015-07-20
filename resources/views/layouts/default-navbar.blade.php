@@ -20,13 +20,21 @@
                     <a href="#"><i class="glyphicon glyphicon-envelope"></i> </a>
                 </li>
                 <li class="form dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Nishant Jani<b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        @if(Auth::check())
+                            @if(!empty(Auth::user()->first_name) && !empty(Auth::user()->first_name))
+                                <% Auth::user()->first_name .  ' ' . Auth::user()->last_name %>
+                            @else
+                                <% Auth::user()->email %>
+                            @endif
+                        @endif
+                    <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li class="text-center">
                             <a href="#"> My Profile</a>
                         </li>
                         <li class="text-center">
-                            <a href="/customer/reset_password"> Log Out</a>
+                            <a href="/logout"> Log Out</a>
                         </li>
                         <li class="divider"></li>
                         <li class="text-center">

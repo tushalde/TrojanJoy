@@ -31,7 +31,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-    protected $hidden = ['id', 'updated_at', 'phone_number', 'email'];
+    protected $hidden = ['id', 'updated_at', 'phone_number'];
 
     /**
      * Get a user by email, throws exception if email not found
