@@ -40550,16 +40550,37 @@ if (typeof jQuery === 'undefined') {
   })
 
 }(jQuery);
+myMarket_signup.factory('profileData', ['$http', '$rootScope', function($http, $rootScope) {
+    var dataToAdd = [];
+
+    return {
+        saveFormData: function($params) {
+            return $http({
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                url: 'http://localhost:8888/api/user/',
+                method: "POST",
+                data: $params,
+            })
+                .success(function(addData) {
+                    dataToAdd = addData;
+                    $rootScope.$broadcast('addedData',dataToAdd);
+                });
+        },
+        get : function() {
+            return $http.get('http://localhost:8888/api/user/8');
+        }
+
+    };
+}]);
 var myMarket = angular.module('myMarket', []);
 myMarket.service('myService', function () { /* ... */ });
 myMarket.controller('LoginController',['$scope',function ($scope){
     $scope.login = function(){
         var OAUTHURL    =   'https://accounts.google.com/o/oauth2/auth?';
-        var VALIDURL    =   'https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=';
+
         var SCOPE1       =   'https://www.googleapis.com/auth/userinfo.email';
         var CLIENTID    =   '886572792671-rp0rm9ehgs5rg2b32mcfp18f4ccrdctm.apps.googleusercontent.com';
-        var REDIRECT    =   'http://localhost:8080';
-        var LOGOUT      =   'http://accounts.google.com/Logout';
+        var REDIRECT    =   'http://localhost:8080/login';
         var TYPE        =   'token';
         var HD          =   'usc.edu';
         var _url        =   OAUTHURL + 'scope=' + SCOPE1 + '&client_id=' + CLIENTID + '&redirect_uri=' + REDIRECT + '&response_type=' + TYPE+'&hd='+HD;
@@ -40582,7 +40603,8 @@ myMarket.controller('LoginController',['$scope',function ($scope){
                     expiresIn = gup(url, 'expires_in');
                     win.close();
 
-                    validateToken(acToken);
+                    url = url.replace("login#","login?");
+                    window.location.href = url;
                 }
             } catch(e) {
             }
@@ -40618,6 +40640,7 @@ myMarket.controller('LoginController',['$scope',function ($scope){
 
         //credits: http://www.netlobo.com/url_query_string_javascript.html
         function gup(url, name) {
+            debugger;url
             name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
             var regexS = "[\\#&]"+name+"=([^&#]*)";
             var regex = new RegExp( regexS );
@@ -40627,15 +40650,6 @@ myMarket.controller('LoginController',['$scope',function ($scope){
             else
                 return results[1];
         }
-
-        function startLogoutPolling() {
-            $('#loginText').show();
-            $('#logoutText').hide();
-            loggedIn = false;
-            $('#uName').text('Welcome ');
-            $('#imgHolder').attr('src', 'none.jpg');
-        }
-
     };
 
 }]);
@@ -40813,28 +40827,6 @@ myMarket_signup.controller('SignupController', function($scope, profileData){
 
 
 
-myMarket_signup.factory('profileData', ['$http', '$rootScope', function($http, $rootScope) {
-    var dataToAdd = [];
-
-    return {
-        saveFormData: function($params) {
-            return $http({
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                url: 'http://localhost:8888/api/user/',
-                method: "POST",
-                data: $params,
-            })
-                .success(function(addData) {
-                    dataToAdd = addData;
-                    $rootScope.$broadcast('addedData',dataToAdd);
-                });
-        },
-        get : function() {
-            return $http.get('http://localhost:8888/api/user/8');
-        }
-
-    };
-}]);
 /*!
  * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2015
  * @version 4.2.3

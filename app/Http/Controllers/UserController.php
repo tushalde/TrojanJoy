@@ -2,67 +2,23 @@
 
 namespace tj_core\Http\Controllers;
 
-use Validator;
-use Illuminate\Http\Request;
+use Request;
 use Illuminate\Support\Facades\Response;
 use tj_core\Http\Requests;
 use tj_core\Models\User;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends APIBaseController
 {
     /**
-     * Instantiate a new UserController instance.
-     *
-     * @return void
+     * Constructor for user controller
+     * @param \Illuminate\Http\Request $request
      */
-    public function __construct()
+    public function __construct(\Illuminate\Http\Request $request)
     {
-//        $this->middleware('auth');
-//        $this->middleware('isMindingOwnBusiness:id', ['only' => ['create','update','destroy']]);
-
-//        $this->middleware('subscribed', ['except' => ['fooAction', 'barAction']]);
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function index()
-    {
-        return ($this->getStructuredResponse(User::all()));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * @param Request $request
-     * @return Response
-     */
-    public function store(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'first_name' => 'required|alpha',
-            'last_name' => 'required|alpha',
-            'email' => 'required|email|unique:users,email',
-            'phone_number' => 'sometimes|numeric',
-        ]);
-
-        if ($validator->fails()) {
-            return Response($this->getStructuredResponse(array(), $validator->errors()->all()));
-        }
-
-        $user = new User($request->all());
-        $saved_user = $user->save();
-        return Response($this->getStructuredResponse($saved_user, 'success', array()));
+        parent::__construct($request);
+        $this->middleware('auth');
+        $this->middleware('isMindingOwnBusiness:id', ['except' => ['show']]);
     }
 
     /**
@@ -77,16 +33,6 @@ class UserController extends APIBaseController
         return ($this->getStructuredResponse(User::find($id)));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -96,7 +42,17 @@ class UserController extends APIBaseController
      */
     public function update($id)
     {
-        //
+        $validator = Validator::make($this->request->all(), static::getUserValidationRules());
+
+        if ($validator->fails()) {
+            return Response($this->getStructuredResponse(array(), $validator->errors()->all()));
+        }
+
+        $updated_user = User::find($id)->update($this->request->all());
+        if ($updated_user) {
+            $updated_user = User::find($id);
+        }
+        return Response($this->getStructuredResponse($updated_user, 'success', array()));
     }
 
     /**
@@ -108,5 +64,15 @@ class UserController extends APIBaseController
     public function destroy($id)
     {
         //
+    }
+
+    private static function getUserValidationRules()
+    {
+        return [
+            'first_name' => 'required|alpha',
+            'last_name' => 'required|alpha',
+            'email' => 'required|email|unique:users,email',
+            'phone_number' => 'sometimes|numeric',
+        ];
     }
 }
