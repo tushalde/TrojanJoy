@@ -66,7 +66,6 @@ myMarket.controller('LoginController',['$scope',function ($scope){
 
         //credits: http://www.netlobo.com/url_query_string_javascript.html
         function gup(url, name) {
-            debugger;url
             name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
             var regexS = "[\\#&]"+name+"=([^&#]*)";
             var regex = new RegExp( regexS );
