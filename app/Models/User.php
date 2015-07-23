@@ -33,6 +33,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     protected $hidden = ['id', 'updated_at', 'phone_number'];
 
+    public function address()
+    {
+        return $this->hasOne('tj_core\Models\EntityAddress', 'entity_id', 'id');
+    }
+
     /**
      * Get a user by email, throws exception if email not found
      * @param string $email email of user
@@ -44,7 +49,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             return false;
         }
 
-        $user = User::where("email", "=", $email)->firstorFail();
+        $user = User::where("email", "=", $email)->first();
         return $user;
     }
 }

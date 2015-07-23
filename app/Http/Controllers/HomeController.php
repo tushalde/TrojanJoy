@@ -54,8 +54,17 @@ class HomeController extends Controller
             $user_data = $this->get_user_info($access_token);
             //find the user with the email id
             $user = User::getUserByEmail($user_data['email']);
-            Auth::login($user);
-            return Redirect::route('market-home');
+            //check if user is not empty
+            if (!empty($user)) {
+                //only then login
+                Auth::login($user);
+                //redirect to market home
+                return Redirect::route('market-home');
+            }
+            //can create the user!
+            else {
+
+            }
         }
         //Something went wrong, logout if at all we logged user in
         Auth::logout();
@@ -77,6 +86,15 @@ class HomeController extends Controller
         Auth::logout();
         //Ghar pe ja
         return Redirect::route('root');
+    }
+
+    public function getDemo()
+    {
+        echo "<pre>";
+        print_r(User::find(1)->address);
+        echo "</pre>";
+        exit;
+
     }
 
     /**

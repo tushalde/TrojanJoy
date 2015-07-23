@@ -21,6 +21,7 @@ class UserController extends APIBaseController
         $this->middleware('isMindingOwnBusiness:id', ['except' => ['show']]);
     }
 
+
     /**
      * Display the specified resource.
      *
