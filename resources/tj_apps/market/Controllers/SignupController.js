@@ -5,6 +5,8 @@ $(document).ready(function() {
 });
 
 
+
+
 var myMarket_signup = angular.module('myMarket_signup', []);
 myMarket_signup.service('myService', function () { /* ... */ });
 myMarket_signup.controller('SignupController', function($scope, profileData){
@@ -18,6 +20,16 @@ myMarket_signup.controller('SignupController', function($scope, profileData){
             "avatar_url": "nishant@gmail.com"
         });
         profileData.saveFormData($params);
+    };
+    $scope.updateData = function(formData) {
+        $params = $.param({
+            "first_name": 'hi',
+            "last_name": 'hello',
+            "phone_number": 2221323232,
+            "email": "nishant8@gmail.com",
+            "avatar_url": "nishant@gmail.com"
+        });
+        profileData.updateProfileInfo($params);
     };
 
     profileData.get()

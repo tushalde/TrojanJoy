@@ -6,7 +6,7 @@ myMarket.controller('LoginController',['$scope',function ($scope){
 
         var SCOPE1       =   'https://www.googleapis.com/auth/userinfo.email';
         var CLIENTID    =   '886572792671-rp0rm9ehgs5rg2b32mcfp18f4ccrdctm.apps.googleusercontent.com';
-        var REDIRECT    =   'http://localhost:8080/login';
+        var REDIRECT    =   'http://localhost:8888/login';
         var TYPE        =   'token';
         var HD          =   'usc.edu';
         var _url        =   OAUTHURL + 'scope=' + SCOPE1 + '&client_id=' + CLIENTID + '&redirect_uri=' + REDIRECT + '&response_type=' + TYPE+'&hd='+HD;
