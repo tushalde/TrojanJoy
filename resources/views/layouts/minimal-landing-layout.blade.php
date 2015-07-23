@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Dancing+Script">
     <link rel="stylesheet" href="/css/app.css"/>
     <link rel="stylesheet" href="<% elixir('css/all.css') %>"/>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
     <script>
     </script>
 </head>

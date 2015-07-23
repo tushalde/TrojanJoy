@@ -7511,6 +7511,7 @@ body {
 .abcRioButtonContentWrapper{
     background-color: #4285f4;
 }
+/* CSS for adding sell item modal window */
 .input-block-level {
     display: block;
     width: 100%;
@@ -7528,21 +7529,12 @@ body {
     color: white;
     font-size: 28px;
 }
-.align_vertical_center {
-    vertical-align: middle;
-    text-align: center;
-    position: relative;
-    top: 50%;
-    -ms-transform: translateY(50%);
-    -webkit-transform: translateY(50%);
-    transform: translateY(50%);
-}
 
 .modal-backdrop {
     z-index: -1;
 }
 
-
+/* CSS for individual item displayed on sell homepage */
 .main {
     background-color: #f2f2f2 ;
     padding: 40px 0;
@@ -7853,5 +7845,29 @@ body {
 
 .file-icon-large {
     font-size: 1.2em;
+}
+#signup_bg {
+    background-image: url("http://localhost:8888/images/temp_signup.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    height: 100vh;
+}
+.login-col {
+    width: 45.4545%;
+}
+.pad_top {
+    padding-top: 50px;
+}
+.pad_bottom {
+    padding-bottom: 30px;
+}
+
+.font_md_bold {
+    font-size: 18px;
+    font-weight: bold;
+}
+.font_md_reg {
+    font-size: 18px;
+    font-weight: normal;
 }
 /*# sourceMappingURL=all.css.map */

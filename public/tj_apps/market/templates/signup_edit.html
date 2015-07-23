@@ -1,0 +1,43 @@
+<form ng-controller="SignupController">
+
+    <!--<div class="fileupload fileupload-new" data-provides="fileupload">
+        <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;"><img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" /></div>
+        <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+        <div>
+            <span class="btn btn-file"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" /></span>
+            <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+        </div>
+    </div> -->
+
+
+
+    <div align="center">
+        <img src="images/profilelarge.png" id="profile_pic" width="30%">
+    </div>
+    <br>
+    <div class="form-group">
+        <input type="text" class="form-control" id="first_name" placeholder="First Name" name="first_name" ng-model="formData.first_name">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" id="last_name" placeholder="Last Name" name="last_name" ng-model="formData.last_name">
+    </div>
+    <div id="locationField" class="form-group">
+        <input type="text" class="form-control" id="autocompleteAddress" placeholder="Address" onFocus="geolocate()">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" id="phone_number" placeholder="Phone" name="phone_number" ng-model="formData.phone_number">
+    </div>
+
+    <button class="btn btn-large btn-success btn-block" ng-click="addData(formData)" id="saveProfile" ng-hide="saveProfile" class="ng-hide">Save profile</button>
+    <button class="btn btn-large btn-success btn-block" ng-click="editProfileData(formData)" id="editProfile" ng-hide="editProfile" class="ng-hide">Edit profile</button>
+
+    <div class="row" id="updateCancelProfile" ng-hide="updateProfile" class="ng-hide">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <button class="btn btn-large btn-success btn-block" ng-click="cancelEdit()" id="cancelEdit">Cancel</button>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <button class="btn btn-large btn-success btn-block" ng-click="updateData(formData)" id="updateProfile">Update Profile</button>
+        </div>
+    </div>
+    <!--<button type="submit" class="btn btn-success btn-block">Save profile</button>-->
+</form>
