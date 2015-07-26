@@ -7618,7 +7618,7 @@ body {
 /*!
  * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014 - 2015
  * @package bootstrap-fileinput
- * @version 4.2.3
+ * @version 4.2.5
  *
  * File input styling for Bootstrap 3.0
  * Built for Yii Framework 2.0
@@ -7671,7 +7671,6 @@ body {
 .file-caption-name {
     display: inline-block;
     overflow: hidden;
-    max-height: 20px;
     padding-right: 10px;
     word-break: break-all;
 }

@@ -11,6 +11,7 @@ Route::group(array('prefix' => 'api'), function()
 {
     //cant invoke index() for users i.e cant access all users
     Route::resource('user', 'UserController', ['except' => ['index', 'create', 'edit', 'store']]);
+    Route::resource('post', 'PostsController', ['except' => ['edit', 'create']]);
 });
 
 // Using different syntax for Blade to avoid conflicts with Jade.
