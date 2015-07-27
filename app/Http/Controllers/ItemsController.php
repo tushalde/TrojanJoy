@@ -9,7 +9,7 @@ use Illuminate\Http\Response;
 use tj_core\Http\Requests;
 use tj_core\Models\Item;
 
-class ItemsController extends Controller
+class ItemsController extends APIBaseController
 {
     /**
      * Display a listing of the resource.
@@ -30,10 +30,10 @@ class ItemsController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($this->request->all(), static::getPostValidationRules());
-
-        if ($validator->fails()) {
-            return Response($this->getStructuredResponse(array(), $validator->errors()->all()));
-        }
+//
+//        if ($validator->fails()) {
+//            return Response($this->getStructuredResponse(array(), $validator->errors()->all()));
+//        }
         Item::create($this->request->all());
     }
 
@@ -59,9 +59,9 @@ class ItemsController extends Controller
     {
         $validator = Validator::make($this->request->all(), static::getPostValidationRules());
 
-        if ($validator->fails()) {
-            return Response($this->getStructuredResponse(array(), $validator->errors()->all()));
-        }
+//        if ($validator->fails()) {
+//            return Response($this->getStructuredResponse(array(), $validator->errors()->all()));
+//        }
 
         $updated_item = Item::find($id)->update($this->request->all());
         if ($updated_item) {

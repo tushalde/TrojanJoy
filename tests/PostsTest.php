@@ -39,7 +39,7 @@ class PostsTest extends TestCase
         $n = 1;
         $latest_post = Post::orderBy('created_at', 'DESC')->take($n)->get()->first();
         //Make request to get the latest post
-        $response = $this->call('GET', '/api/post/1'.$latest_post->id);
+        $response = $this->call('GET', '/api/post/'.$latest_post->id);
         //If not logged in, redirect to login page, 302 response code
         $this->assertEquals(302, $response->status());
     }
@@ -100,7 +100,7 @@ class PostsTest extends TestCase
     }
 
     /**
-     * Delete the user in tearDown
+     * Delete the post in tearDown
      */
     public function tearDown()
     {
