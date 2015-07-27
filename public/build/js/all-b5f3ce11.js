@@ -42035,6 +42035,22 @@ myMarket_signup.factory('profileData', ['$http', '$rootScope', function($http, $
                 self.initCaption();
             }
         },
+        resetPreviewThumbs: function (isAjax) {
+            var self = this, out;
+            if (isAjax) {
+                self.clearPreview();
+                self.filestack = [];
+                return;
+            }
+            if (self.hasInitialPreview()) {
+                out = previewCache.out(self.id);
+                self.$preview.html(out.content);
+                self.setCaption(out.caption);
+                self.initPreviewDeletes();
+            } else {
+                self.clearPreview();
+            }
+        },
         reset: function () {
             var self = this;
             self.resetPreview();
@@ -42055,7 +42071,8 @@ myMarket_signup.factory('profileData', ['$http', '$rootScope', function($http, $
             self.raise('filedisabled');
             self.$element.attr('disabled', 'disabled');
             self.$container.find(".kv-fileinput-caption").addClass("file-caption-disabled");
-            self.$container.find(".btn-file, .fileinput-remove, .kv-fileinput-upload, .file-preview-frame button").attr("disabled", true);
+            self.$container.find(".btn-file, .fileinput-remove, .kv-fileinput-upload, .file-preview-frame button").attr("disabled",
+                true);
             self.initDragDrop();
         },
         enable: function () {
@@ -42103,6 +42120,8 @@ myMarket_signup.factory('profileData', ['$http', '$rootScope', function($http, $
         },
         ajaxSubmit: function (fnBefore, fnSuccess, fnComplete, fnError, previewId, index) {
             var self = this, settings;
+            self.raise('filepreajax', [previewId, index]);
+            self.uploadExtra(previewId, index);
             settings = $.extend({
                 xhr: function () {
                     var xhrobj = $.ajaxSettings.xhr();
@@ -42115,10 +42134,7 @@ myMarket_signup.factory('profileData', ['$http', '$rootScope', function($http, $
                 cache: false,
                 processData: false,
                 contentType: false,
-                beforeSend: function () {
-                    fnBefore.apply(this, arguments);
-                    self.uploadExtra(previewId, index);
-                },
+                beforeSend: fnBefore,
                 success: fnSuccess,
                 complete: fnComplete,
                 error: fnError
@@ -42758,8 +42774,9 @@ myMarket_signup.factory('profileData', ['$http', '$rootScope', function($http, $
             self.fileInputCleared = false;
             var tfiles, msg, total, $preview = self.$preview, isDragDrop = arguments.length > 1,
                 files = isDragDrop ? e.originalEvent.dataTransfer.files : $el.get(0).files,
-                isSingleUpload = isEmpty($el.attr('multiple')), i = 0, f, m, folders = 0,
-                ctr = self.filestack.length, isAjaxUpload = self.isUploadable,
+                isSingleUpload = isEmpty($el.attr('multiple')), i = 0, f, n, folders = 0,
+                ctr = self.filestack.length, isAjaxUpload = self.isUploadable, len,
+                flagSingle = (isSingleUpload && ctr > 0),
                 throwError = function (mesg, file, previewId, index) {
                     var p1 = $.extend(self.getOutData({}, {}, files), {id: previewId, index: index}),
                         p2 = {id: previewId, index: index, file: file, files: files};
@@ -42800,32 +42817,32 @@ myMarket_signup.factory('profileData', ['$http', '$rootScope', function($http, $
                 return;
             }
             self.resetErrors();
-            total = self.isUploadable ? self.getFileStack().length + tfiles.length : tfiles.length;
+            len = tfiles.length;
+            total = self.isUploadable ? self.getFileStack().length + len : len;
             if (self.maxFileCount > 0 && total > self.maxFileCount) {
-                msg = self.msgFilesTooMany.replace('{m}', self.maxFileCount).replace('{n}', total);
-                self.isError = throwError(msg, null, null, null);
-                self.$captionContainer.find('.kv-caption-icon').hide();
-                self.setCaption('', true);
-                self.setEllipsis();
-                self.$container.removeClass('file-input-new file-input-ajax-new');
-                return;
-            }
-            if (!isAjaxUpload || (isSingleUpload && ctr > 0)) {
-                if (self.hasInitialPreview()) {
-                    var out = previewCache.out(self.id);
-                    $preview.html(out.content);
-                    self.setCaption(out.caption);
-                    self.initPreviewDeletes();
-                } else {
-                    self.clearPreview();
+                if (!self.autoReplace || len > self.maxFileCount) {
+                    n = (self.autoReplace && len > self.maxFileCount) ? len : total;
+                    msg = self.msgFilesTooMany.replace('{m}', self.maxFileCount).replace('{n}', n);
+                    self.isError = throwError(msg, null, null, null);
+                    self.$captionContainer.find('.kv-caption-icon').hide();
+                    self.setCaption('', true);
+                    self.setEllipsis();
+                    self.$container.removeClass('file-input-new file-input-ajax-new');
+                    return;
                 }
-                if (isSingleUpload && ctr > 0) {
-                    self.filestack = [];
+                if (total > self.maxFileCount) {
+                    self.resetPreviewThumbs(isAjaxUpload);
                 }
             } else {
-                if (isAjaxUpload && ctr === 0 && (!previewCache.count(self.id) || self.overwriteInitial)) {
-                    self.clearPreview();
-                    self.filestack = [];
+                 if (!isAjaxUpload || flagSingle) {
+                    self.resetPreviewThumbs(false);
+                    if (flagSingle) {
+                        self.filestack = [];
+                    }
+                } else {
+                    if (isAjaxUpload && ctr === 0 && (!previewCache.count(self.id) || self.overwriteInitial)) {
+                        self.resetPreviewThumbs(true);
+                    }
                 }
             }
             if (self.isPreviewable) {
@@ -43019,6 +43036,7 @@ myMarket_signup.factory('profileData', ['$http', '$rootScope', function($http, $
         showUpload: true,
         showCancel: true,
         showUploadedThumbs: true,
+        autoReplace: false,
         mainClass: '',
         previewClass: '',
         captionClass: '',

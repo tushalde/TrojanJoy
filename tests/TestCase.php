@@ -33,15 +33,14 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
         return $randomString;
     }
 
-    public static function generateRandomOwnerId($length = 1) {
-        //Generates & returns a random owner id between 1 to 4
-        $numbers = '1234';
+    public static function generateRandomInteger($numbers, $length = 1) {
+        //Generates & returns a random number from digits $numbers of length $length
         $numbersLength = strlen($numbers);
         $randomNumber = 0;
         for ($i = 0; $i < $length; $i++) {
             $randomNumber .= $numbers[rand(0, $numbersLength - 1)];
         }
-        return $randomNumber;
+        return substr($randomNumber,1);
     }
 
 }

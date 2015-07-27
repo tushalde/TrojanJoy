@@ -7,11 +7,10 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Response;
 
 use tj_core\Http\Requests;
-use tj_core\Models\Post;
+use tj_core\Models\Item;
 
-class PostsController extends APIBaseController
+class ItemsController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -35,8 +34,7 @@ class PostsController extends APIBaseController
         if ($validator->fails()) {
             return Response($this->getStructuredResponse(array(), $validator->errors()->all()));
         }
-        Post::create($this->request->all());
-
+        Item::create($this->request->all());
     }
 
     /**
@@ -47,7 +45,7 @@ class PostsController extends APIBaseController
      */
     public function show($id)
     {
-        return ($this->getStructuredResponse(Post::find($id)));
+        return ($this->getStructuredResponse(Item::find($id)));
     }
 
     /**
@@ -65,11 +63,11 @@ class PostsController extends APIBaseController
             return Response($this->getStructuredResponse(array(), $validator->errors()->all()));
         }
 
-        $updated_post = Post::find($id)->update($this->request->all());
-        if ($updated_post) {
-            $updated_post = Post::find($id);
+        $updated_item = Item::find($id)->update($this->request->all());
+        if ($updated_item) {
+            $updated_item = Item::find($id);
         }
-        return Response($this->getStructuredResponse($updated_post, 'success', array()));
+        return Response($this->getStructuredResponse($updated_item, 'success', array()));
     }
 
     /**
@@ -86,9 +84,13 @@ class PostsController extends APIBaseController
     private static function getPostValidationRules()
     {
         return [
-            'owner_id' => 'required|numeric',
+            'post_id' => 'required|numeric',
             'title' => 'required|alpha_num',
             'description' => 'sometimes|aplha_num',
+            'price' => 'required|alpha_num',
+            'status_id' => 'required|numberic',
+            'pickup_location' => 'required|numberic',
+            'category_id' => 'required|numberic',
         ];
     }
 }
