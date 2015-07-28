@@ -17,7 +17,8 @@ class UserTest extends TestCase
         $this->_user = \tj_core\Models\User::create(array(
             'first_name' => static::generateRandomString(),
             'last_name'  => static::generateRandomString(),
-            'email' => static::generateRandomString(5). '@' . static::generateRandomString(5).'.com'
+            'email' => static::generateRandomString(5). '@' . static::generateRandomString(5).'.com',
+            'avatar_url' => static::generateRandomString(30)
         ));
     }
 

@@ -31,11 +31,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-    protected $hidden = ['id', 'updated_at', 'phone_number'];
+    protected $hidden = ['updated_at', 'phone_number'];
 
     public function address()
     {
-        return $this->hasOne('tj_core\Models\EntityAddress', 'entity_id', 'id');
+        return $this->hasone('tj_core\Models\EntityAddress', 'entity_id', 'id');
     }
 
     /**

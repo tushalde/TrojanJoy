@@ -11,13 +11,16 @@ var elixir = require('laravel-elixir');
  |
  */
 
-elixir(function(mix) {
+elixir(function (mix) {
     mix.scripts([
-            'resources/assets/js/libs/**/*.js',
-            'resources/assets/js/libs/*.js',
-            'resources/tj_apps/**/**/*.js',
-            'vendor/kartik-v/bootstrap-fileinput/js/fileinput.js'
-        ],'' ,'./');
+        'resources/assets/js/libs/angular.js',
+        'resources/assets/js/libs/angular-ui-router.min.js',
+        'resources/assets/js/libs/**/*.js',
+        'resources/assets/js/libs/*.js',
+        'resources/tj_apps/*.js',
+        'resources/tj_apps/**/**/*.js',
+        //'vendor/kartik-v/bootstrap-fileinput/js/fileinput.js'
+    ], '', './');
     mix.styles([
         'resources/assets/css/bootstrap.min.css',
         'resources/assets/css/trojan_joy_core.css',
@@ -26,10 +29,10 @@ elixir(function(mix) {
         'vendor/kartik-v/bootstrap-fileinput/css/fileinput.css',
         'resources/assets/css/signup.css',
         'resources/assets/css/profile_view.css'
-        ],'','./');
+    ], '', './');
     mix.version([
-            'css/all.css',
-            'js/all.js'
-        ]);
-    mix.copy('fonts','public/fonts')
+        'css/all.css',
+        'js/all.js'
+    ]);
+    mix.copy('fonts', 'public/fonts')
 });

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Response;
 use tj_core\Http\Requests;
 use tj_core\Models\User;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends APIBaseController
 {
@@ -17,8 +18,8 @@ class UserController extends APIBaseController
     public function __construct(\Illuminate\Http\Request $request)
     {
         parent::__construct($request);
-        $this->middleware('auth');
-        $this->middleware('isMindingOwnBusiness:id', ['except' => ['show']]);
+//        $this->middleware('auth');
+//        $this->middleware('isMindingOwnBusiness:id', ['except' => ['show']]);
     }
 
 
@@ -49,6 +50,11 @@ class UserController extends APIBaseController
             return Response($this->getStructuredResponse(array(), $validator->errors()->all()));
         }
 
+
+        $updated_fields = $this->request->all();
+        $updated_fields['email'] = Auth::user()->email;
+        $updated_fields['avatar_url'] = 'google.com';
+
         $updated_user = User::find($id)->update($this->request->all());
         if ($updated_user) {
             $updated_user = User::find($id);
@@ -72,7 +78,6 @@ class UserController extends APIBaseController
         return [
             'first_name' => 'required|alpha',
             'last_name' => 'required|alpha',
-            'email' => 'required|email|unique:users,email',
             'phone_number' => 'sometimes|numeric',
         ];
     }

@@ -79,14 +79,10 @@
 
     </script>
 </head>
-<body onload="initialize()">
+<body>
 @include('layouts.default-navbar')
 <div class="content">
     @yield('content')
-
-
 </div>
-
-
 </body>
 </html>

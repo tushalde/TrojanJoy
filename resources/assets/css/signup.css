@@ -1,6 +1,4 @@
 #signup_bg {
-    background-image: url("http://localhost:8888/images/temp_signup.jpg");
-    background-repeat: no-repeat;
     background-size: 100% auto;
     height: 100vh;
 }
