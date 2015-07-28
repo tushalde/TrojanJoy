@@ -18,7 +18,7 @@ class UserTest extends TestCase
             'first_name' => static::generateRandomString(),
             'last_name'  => static::generateRandomString(),
             'email' => static::generateRandomString(5). '@' . static::generateRandomString(5).'.com',
-            'avatar_url' => static::generateRandomString(30)
+            'avatar_url' => static::generateRandomString(10)
         ));
     }
 

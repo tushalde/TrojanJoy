@@ -33,4 +33,14 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
         return $randomString;
     }
 
+    public static function generateRandomInteger($numbers, $length = 1) {
+        //Generates & returns a random number from digits $numbers of length $length
+        $numbersLength = strlen($numbers);
+        $randomNumber = 0;
+        for ($i = 0; $i < $length; $i++) {
+            $randomNumber .= $numbers[rand(0, $numbersLength - 1)];
+        }
+        return substr($randomNumber,1);
+    }
+
 }
