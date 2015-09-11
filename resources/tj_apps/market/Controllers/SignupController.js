@@ -47,16 +47,15 @@ user_profile_module.controller('ProfileEditController', ['$scope', '$state', '$e
 
     var autocomplete;
     //Initializing google map address autocompelte
+    var componentForm = {
+        street_number: 'short_name',
+        route: 'long_name',
+        locality: 'long_name',
+        administrative_area_level_1: 'short_name',
+        country: 'long_name',
+        postal_code: 'short_name'
+    };
     $scope.init = function() {
-        var placeSearch;
-        var componentForm = {
-            street_number: 'short_name',
-            route: 'long_name',
-            locality: 'long_name',
-            administrative_area_level_1: 'short_name',
-            country: 'long_name',
-            postal_code: 'short_name'
-        };
         //get the autocomplete address field
         var address_field = $($element).find('#autocompleteAddress')[0];
         // Create the autocomplete object, restricting the search
@@ -69,23 +68,31 @@ user_profile_module.controller('ProfileEditController', ['$scope', '$state', '$e
         google.maps.event.addListener(autocomplete, 'place_changed', function() {
             $scope.fillInAddress();
         });
+
+
+        /**
+         * To fill the user form, prefetch user data
+         * TODO: write a global handler for errors
+         */
+        UserService.get().then(function(response) {
+            $scope.formData = response.data;
+
+        });
     };
 
     $scope.fillInAddress = function() {
         // Get the place details from the autocomplete object.
         var place = autocomplete.getPlace();
 
-        for (var component in componentForm) {
-            $($element).find(component).value('').attr('disabled',false);
-        }
-
+        var address_field = $($element).find('#autocompleteAddress');
         // Get each component of the address from the place details
         // and fill the corresponding field on the form.
         for (var i = 0; i < place.address_components.length; i++) {
             var addressType = place.address_components[i].types[0];
             if (componentForm[addressType]) {
                 var val = place.address_components[i][componentForm[addressType]];
-                $($element).find(addressType).value(val);
+                address_field.data(addressType, val);
+                //$($element).find(addressType).value(val);
                 //document.getElementById(addressType).value = val;
             }
         }
@@ -105,18 +112,23 @@ user_profile_module.controller('ProfileEditController', ['$scope', '$state', '$e
         }
     };
 
-
-
-
     $scope.update = function(user) {
+        //First save the user.
         var user_info = angular.copy(user);
 
         var current_user = AuthService.currentUser();
         user_info['id'] = current_user['id'];
         //save the user info
-        UserService.update(user_info).success(function(response) {
+        var save_user = UserService.update(user_info);
+        var save_user_address;
+
+        save_user.then(function(response) {
+            save_user_address
             $state.go('default');
         });
+
+        //Now save the corresponding address.
+
     };
 
 

@@ -31,7 +31,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-    protected $hidden = ['updated_at', 'phone_number'];
+    protected $hidden = ['updated_at', 'created_at'];
 
     public function address()
     {

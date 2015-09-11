@@ -10,16 +10,16 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li class="">
+                <li class="text-center">
                     <a href="#">Market</a>
                 </li>
-                <li class="">
+                <li class="text-center">
                     <a href="#"><i class="glyphicon glyphicon-bell"></i> </a>
                 </li>
-                <li class="">
+                <li class="text-center">
                     <a href="#"><i class="glyphicon glyphicon-envelope"></i> </a>
                 </li>
-                <li class="form dropdown">
+                <li class="form dropdown text-center">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         @if(Auth::check())
                             @if(!empty(Auth::user()->first_name) && !empty(Auth::user()->first_name))
@@ -31,7 +31,7 @@
                     <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li class="text-center">
-                            <a href="#"> My Profile</a>
+                            <a href="/signup/"> My Profile</a>
                         </li>
                         <li class="text-center">
                             <a href="/logout"> Log Out</a>

@@ -50,6 +50,7 @@ myMarket.controller('LoginController',['$scope',function ($scope){
             });
         }
 
+        //TODO: Remove this
         function getUserInfo() {
             $.ajax({
                 url: 'https://www.googleapis.com/oauth2/v1/userinfo?access_token=' + acToken,

@@ -17,6 +17,11 @@ class CreateEntityAddressTable extends Migration
                     `entity_id` INT(11) UNSIGNED NOT NULL,
                     `entity_class` VARCHAR(80) NOT NULL,
                     `address` VARCHAR(100) NOT NULL,
+                    `street_name` VARCHAR(50) NOT NULL,
+                    `street_number` VARCHAR(20) NOT NULL,
+                    `city` VARCHAR(100) NOT NULL,
+                    `state` VARCHAR(100) NOT NUll,
+                    `postal_zip` VARCHAR(20) NOT NULL,
                     `lat` POINT NOT NULL,
                     `lng` POINT NOT NULL)";
             DB::connection()->getPdo()->exec($sql);
